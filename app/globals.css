@@ -1,23 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Athiti:wght@200;300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
-  --background: #ffffff;
+  --accent: #76D577;
   --foreground: #171717;
+  --primary: #F03F83;
+  --secondary: #8963B8;
+  --ternary: #FFAE2D;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--accent);
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+.athiti {
+  font-family: "Athiti", sans-serif;
+}
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
 }
 
 @layer utilities {
