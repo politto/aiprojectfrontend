@@ -8,6 +8,7 @@ type Props = {
 type FallacyPredProps = {
   fallacy: string,
   percentage: number
+  words: number
 }
 
 export default function FallacyResultBox({data, error}: Props) {

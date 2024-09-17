@@ -8,7 +8,8 @@ type Props = {
 
 type emoPredProps = {
   emotion: string,
-  percentage: number
+  percentage: number,
+  words: number
 }
 
 export default function EmotionResultBox({data, error}: Props) {
