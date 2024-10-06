@@ -7,7 +7,8 @@ type Props = {
     error: boolean
 }
 
-const mockData = [
+// ข้อมูล mockData ที่ใช้สำหรับฝั่ง Emotion
+const mockData: IEmoPredProps[] = [
   {
    emotion: "joy",
    percentage: 50,
@@ -37,28 +38,31 @@ const mockData = [
 
 export default function EmotionResultBox({ data, error }: Props) {
   console.log(data)
-  if (data.length == 0) { data = mockData }
 
-  const chartData: ChartData[] = [];
-  data.map((item) => {
-    chartData.push({
-      "id": item.emotion,
-      "label": item.emotion,
-      "value": item.percentage,
-      "color": "hsl(200, 100%, 50%)"
-    })
-  })
+  // ถ้าไม่มีข้อมูลใช้ mockData
+  if (data.length === 0) { 
+    data = mockData 
+  }
+
+  const chartData = data.map((item) => ({
+    id: item.emotion,
+    label: item.emotion,
+    value: item.percentage,
+    color: `hsl(${Math.random() * 360}, 70%, 50%)` // กำหนดสีแบบสุ่ม
+  }));
 
   return (
     <section className="">
-
       <section className="montserrat flex flex-col justify-center py-[2em] px-[1em] md:px-10 bg-white rounded-[3em] gap-4">
-        <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">Emotion analysis result Pie chart</h2>
+        <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">
+          Emotion analysis result Pie chart
+        </h2>
 
         <section className="flex flex-col md:flex-row">
           <section className="picWrapper min-w-full md:min-w-[50%] h-[40vh]">
             <p className="text-2xl text-gray-600 text-[#F03F83] font-semibold">Overview</p>
-            <PieChart data={chartData}></PieChart>
+            {/* ส่งข้อมูล chartData ไปยัง PieChart */}
+            <PieChart data={chartData} />
           </section>
 
           <section className="flex flex-col justify-start self-start gap-6 ml-16">
@@ -73,7 +77,6 @@ export default function EmotionResultBox({ data, error }: Props) {
           </section>
         </section>
       </section>
-
     </section>
   )
 }

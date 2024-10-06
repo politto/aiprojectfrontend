@@ -1,16 +1,14 @@
-// page.tsx
+'use client';
 
-'use client'
-
-import Image from "next/image";
-import { SearchBox } from "./components/SearchBox";
 import { useEffect, useState } from "react";
 import EmotionResultBox from "./components/EmotionResult";
+import EmotionDetailBox from "./components/EmotionDetailBox";
 import { predictEmotion, predictFallacy } from "./api/AxiosApi";
 import FallacyResultBox from "./components/FallacyResult";
 import { IEmoPredProps } from "./types/IEmoPredProps";
 import { IFallacyPredProps } from "./types/IFallacyPredProps";
 import ResetButton from "./components/ResetButton";
+import { SearchBox } from "./components/SearchBox";
 
 export default function Home() {
   const [isAnalyzeRequested, setAnalyzeRequested] = useState<boolean>(false);
@@ -21,42 +19,45 @@ export default function Home() {
   const [emotionDataAndError, setEmotionDataAndError] = useState<[IEmoPredProps[], boolean]>([[], false]);
   const [fallacyDataAndError, setFallacyDataAndError] = useState<[IFallacyPredProps[], boolean]>([[], false]);
 
+  // Fetch emotion analysis
   useEffect(() => {
     if (isAnalyzeRequested && isEmotionRequested) {
       predictEmotion(prompt).then((data) => {
         setEmotionDataAndError(data);
-        console.log('Emotion data:', data);  // ล็อกข้อมูลที่ได้รับจาก API
+        console.log('Emotion data:', data);
       }).catch((error) => {
         console.error('Error fetching emotion data:', error);
-        setEmotionDataAndError([[], true]); // กำหนดสถานะข้อผิดพลาดถ้าเกิด error
+        setEmotionDataAndError([[], true]); // Set error status
       });
     }
 
+    // Fetch fallacy analysis
     if (isAnalyzeRequested && isFallacyRequested) {
       predictFallacy(prompt).then((data) => {
         setFallacyDataAndError(data);
-        console.log('Fallacy data:', data); // ล็อกข้อมูลที่ได้รับจาก API
+        console.log('Fallacy data:', data);
       }).catch((error) => {
         console.error('Error fetching fallacy data:', error);
-        setFallacyDataAndError([[], true]); // กำหนดสถานะข้อผิดพลาดถ้าเกิด error
+        setFallacyDataAndError([[], true]); // Set error status
       });
     }
     
+    // Clean up
     return () => {
-      // ล้างค่าข้อมูลเมื่อยกเลิกการใช้ useEffect
       setEmotionDataAndError([[], false]);
       setFallacyDataAndError([[], false]);
     };
-  }, [isAnalyzeRequested, isEmotionRequested, isFallacyRequested, prompt]); // เพิ่ม prompt เพื่อให้ทำงานเมื่อ prompt เปลี่ยนแปลง
+  }, [isAnalyzeRequested, isEmotionRequested, isFallacyRequested, prompt]);
 
+  // Reset all states
   const resetAll = () => {
     setAnalyzeRequested(false);
     setFallacyRequested(false);
     setEmotionRequested(false);
     setPrompt("");
-    setEmotionDataAndError([[], false]); // ล้างข้อมูล emotion
-    setFallacyDataAndError([[], false]); // ล้างข้อมูล fallacy
-  }
+    setEmotionDataAndError([[], false]);
+    setFallacyDataAndError([[], false]);
+  };
 
   return (
     <main className="my-[2vw] w-[96vw] lg:w-[80vw] xl:w-[70vw] 2xl:w-[60vw] flex flex-col justify-center m-auto gap-4">
@@ -70,15 +71,23 @@ export default function Home() {
         prompt={prompt}
         setPrompt={setPrompt}
         resetAll={resetAll}
-      ></SearchBox>
-      
+      />
+
+      {/* แสดงผล EmotionDetailBox และ EmotionResultBox */}
       {isAnalyzeRequested && isEmotionRequested && (
-        <EmotionResultBox
-          data={emotionDataAndError[0]}
-          error={emotionDataAndError[1]}
-        />
+        <>
+          <EmotionDetailBox
+            data={emotionDataAndError[0]}
+            error={emotionDataAndError[1]}
+          />
+          <EmotionResultBox
+            data={emotionDataAndError[0]}
+            error={emotionDataAndError[1]}
+          />
+        </>
       )}
 
+      {/* แสดงผล FallacyResultBox เมื่อมีการเลือก Fallacy */}
       {isAnalyzeRequested && isFallacyRequested && (
         <FallacyResultBox
           data={fallacyDataAndError[0]}
