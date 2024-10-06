@@ -12,14 +12,34 @@ type ISearch = {
     setFallacyRequested: (isFallacyRequested: boolean) => void;
     prompt: string;
     setPrompt: (prompt: string) => void;
+    resetAll: () => void;
 }
 
-export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionRequested, setEmotionRequested, isFallacyRequested, setFallacyRequested, prompt, setPrompt} : ISearch) => {
+export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionRequested, setEmotionRequested, isFallacyRequested, setFallacyRequested, prompt, setPrompt, resetAll} : ISearch) => {
 
     
     const handlePromptChange = (event: any) => {
+
         setPrompt(event.target.value)
+        // if (isAnalyzeRequested) resetAll()
     }
+
+    const handleAnalyzeClick = (event: any) => {
+        if (validatePrompt(prompt, setPrompt)) return 
+        if (isEmotionRequested || isFallacyRequested) setAnalyzeRequested(true)
+        else setAnalyzeRequested(false)
+    }
+
+    const validatePrompt = (prompt: string, setPrompt: (prompt: string) => void) => {
+        // I want some pattern matching
+    
+        if (!prompt.match(/^[a-zA-Z0-9\s.?!-,()]+$/)) {
+          alert("You are Please enter a valid prompt with english language only and not with any spacial character");
+          setPrompt("");
+          return false;
+        }
+        return true;
+      }
     return (
         <section>
         <Banner></Banner>
@@ -35,6 +55,7 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
                     className="rounded-xl w-full athiti p-2 h-[200px]"
                     value = {prompt}
                     onChange={handlePromptChange}
+                    // onBlur={handlePromptChange}
                 ></textarea>
                 <section className="flex justify-center gap-4 text-black font-semibold text-xl flex-col md:flex-row">
 
@@ -62,9 +83,7 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
                         <Icon_Emotion></Icon_Emotion>
                     </button>
                     <button className= {!isAnalyzeRequested? "k  py-2 px-4 rounded-lg inline-flex items-center gap-2 w-full justify-center bg-[--ternary]" : "k  py-2 px-4 rounded-lg inline-flex items-center gap-2 w-full justify-center bg-[--accent]"}
-                        onClick={() => {
-                            if (isEmotionRequested || isFallacyRequested) setAnalyzeRequested(true)
-                            else setAnalyzeRequested(false)}}
+                        onClick={handleAnalyzeClick}
                         >
                     
                         {!isAnalyzeRequested? "Analyze this" : "result below"}

@@ -55,6 +55,7 @@ export default function Home() {
       <SearchBox isAnalyzeRequested = {isAnalyzeRequested} setAnalyzeRequested={setAnalyzeRequested} isEmotionRequested= {isEmotionRequested} setEmotionRequested={setEmotionRequested} isFallacyRequested = {isFallacyRequested} setFallacyRequested = {setFallacyRequested}
       prompt={prompt}
       setPrompt={setPrompt}
+      resetAll={resetAll}
        ></SearchBox>
       
       {isAnalyzeRequested && isEmotionRequested &&
@@ -63,11 +64,11 @@ export default function Home() {
        
       }
 
-    {isAnalyzeRequested && isFallacyRequested &&
+    {/* {isAnalyzeRequested && isFallacyRequested && */}
       
       <FallacyResultBox data = {fallacyDataAndError[0]} error = {fallacyDataAndError[1]}/>
        
-      }
+      {/* } */}
 
       <ResetButton resetAll = {resetAll}/>
       
