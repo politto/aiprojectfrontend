@@ -3,14 +3,13 @@
 import Image from "next/image";
 import { SearchBox } from "./components/SearchBox";
 import { useEffect, useState } from "react";
-import EmotionResultBox from "./components/EmotionResultBox";
+import EmotionResultBox from "./components/EmotionResult";
 import { predictEmotion, predictFallacy } from "./api/AxiosApi";
 import FallacyResultBox from "./components/FallacyResult";
+import { IEmoPredProps } from "./types/IEmoPredProps";
+import { IFallacyPredProps } from "./types/IFallacyPredProps";
+import ResetButton from "./components/ResetButton";
 
-type predictionResult = {
-  predictedClass: string,
-  predictedPercentate: number,
-}
 export default function Home() {
   const [isAnalyzeRequested, setAnalyzeRequested] = useState<boolean>(false);
   const [isEmotionRequested, setEmotionRequested] = useState<boolean>(false);
@@ -19,8 +18,8 @@ export default function Home() {
   
   const [prompt, setPrompt] = useState<string>("");
 
-  const [emotionDataAndError, setEmotionDataAndError] = useState<[string, boolean]>(["", false]);
-  const [fallacyDataAndError, setFallacyDataAndError] = useState<[string, boolean]>(["", false]);
+  const [emotionDataAndError, setEmotionDataAndError] = useState<[IEmoPredProps[], boolean]>([[], false]);
+  const [fallacyDataAndError, setFallacyDataAndError] = useState<[IFallacyPredProps[], boolean]>([[], false]);
 
   useEffect(() => {
     if (isAnalyzeRequested && isEmotionRequested) {
@@ -43,13 +42,16 @@ export default function Home() {
     };
   }, [isAnalyzeRequested, isEmotionRequested, isFallacyRequested]);
 
+
+  const resetAll = () => {
+    setAnalyzeRequested(false);
+    setFallacyRequested(false);
+    setEmotionRequested(false);
+    setPrompt("");
+  }
+
   return (
-    <main className = "w-full md:w-[80vw] xl:w-[60vw] flex flex-col justify-center m-auto gap-4">
-      <section className = "">
-        <header className = "text-center text-6xl font-semibold montserrat py-10">
-        Logical Fallacy & Emotion detection Model
-      </header>
-      </section>
+    <main className = "my-[2vw] w-[96vw] lg:w-[80vw] xl:w-[70vw] 2xl:w-[60vw] flex flex-col justify-center m-auto gap-4">
       <SearchBox isAnalyzeRequested = {isAnalyzeRequested} setAnalyzeRequested={setAnalyzeRequested} isEmotionRequested= {isEmotionRequested} setEmotionRequested={setEmotionRequested} isFallacyRequested = {isFallacyRequested} setFallacyRequested = {setFallacyRequested}
       prompt={prompt}
       setPrompt={setPrompt}
@@ -66,6 +68,8 @@ export default function Home() {
       <FallacyResultBox data = {fallacyDataAndError[0]} error = {fallacyDataAndError[1]}/>
        
       }
+
+      <ResetButton resetAll = {resetAll}/>
       
 
     </main>

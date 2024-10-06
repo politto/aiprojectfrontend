@@ -1,24 +1,20 @@
 import React from 'react'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+import { IEmoPredProps } from '../types/IEmoPredProps';
 
 type Props = {
-    data: emoPredProps[]
+    data: IEmoPredProps[]
     error: boolean
 }
 
-type emoPredProps = {
-  emotion: string,
-  percentage: number,
-  words: number
-}
 
-export default function EmotionResultBox({data, error}: Props) {
+export default function EmotionResult({data, error}: Props) {
 
   const mockData = {
     emotion: ""
   }
   return (
-    <section className="flex flex-col justify-center p-10 bg-white rounded-xl gap-4">
+    <section className="flex flex-col justify-center p-10 bg-white rounded-2xl gap-4">
 
         {data &&
         <>
