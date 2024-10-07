@@ -83,7 +83,7 @@ export default function FallacyResultBox({data, error}: Props) {
         <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">Logical Fallacy Prediction Pie chart</h2>
 
         <section className="flex flex-col md:flex-row">
-          <section className="picWrapper min-w-full md:min-w-[60%] h-[50vh]">
+          <section className="picWrapper min-w-full md:min-w-[50%] h-[40vh]">
             <p className="text-2xl text-gray-600 text-[#F03F83] font-semibold">Overview</p>
             <PieChart data={chartData}></PieChart>
           </section>
@@ -94,6 +94,8 @@ export default function FallacyResultBox({data, error}: Props) {
             <p className = "mt-5">followed by</p>
             <p className = "text-[--secondary]">{data[1].fallacy} at {data[1].percentage}%</p>
             <p className = "text-[--secondary]">{data[2]?.fallacy} at {data[2]?.percentage}%</p>
+            <p className = "text-[--secondary]">{data[3]?.fallacy} at {data[3]?.percentage}%</p>
+            <p className = "text-[--secondary]">{data[4]?.fallacy} at {data[4]?.percentage}%</p>
 
           </section>
         </section>

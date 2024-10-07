@@ -40,7 +40,8 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
           setPrompt("");
           return false;
         }
-        if (prompt.match(/\s/g)!.length > 999) {
+        const spaceMatch = prompt.match(/\s/g) 
+        if (spaceMatch != null && spaceMatch.length > 999) {
             alert("This paragraph exceeds 1000 words")
             return false;
         }
