@@ -30,13 +30,19 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
         else setAnalyzeRequested(false)
     }
 
+    
+
     const validatePrompt = (prompt: string, setPrompt: (prompt: string) => void) => {
         // I want some pattern matching
     
-        if (!prompt.match(/^[a-zA-Z0-9\s.?!-,()]+$/)) {
+        if (!prompt.match(/^[a-zA-Z0-9\s.?!-_,()]+$/)) {
           alert("You are Please enter a valid prompt with english language only and not with any spacial character");
           setPrompt("");
           return false;
+        }
+        if (prompt.match(/\s/g)!.length > 999) {
+            alert("This paragraph exceeds 1000 words")
+            return false;
         }
         // console.log("validate passed")
         return true;
@@ -58,7 +64,7 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
                     onChange={handlePromptChange}
                     // onBlur={handlePromptChange}
                 ></textarea>
-                <section className="flex justify-center gap-4 text-black font-semibold text-xl flex-col md:flex-row">
+                <section className="flex justify-center gap-4 text-black font-semibold text-xl flex-col xl:flex-row">
 
                     <button className= {isFallacyRequested? 
                     "  py-2 px-4 rounded-lg inline-flex items-center gap-2 w-full justify-center bg-gradient-to-b from-[#5F63CE] to-[#7BC8FF] min-w-[14em]" 
@@ -73,14 +79,14 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
                         logical fallacy analysis
                         <Icon_Bad></Icon_Bad>
                     </button>
-                    <button className= {isEmotionRequested? "k  py-2 px-4 rounded inline-flex items-center gap-2 w-full justify-center bg-[--secondary]" : "k  py-2 px-4 rounded-lg inline-flex items-center gap-2 w-full justify-center bg-white"}
+                    <button className= {isEmotionRequested? "k  py-2 px-4 rounded inline-flex items-center gap-2 w-full justify-center bg-gradient-to-b from-[--secondary] to-[#7BC8FF] min-w-[14em] " : "k  py-2 px-4 rounded-lg inline-flex items-center gap-2 w-full justify-center bg-white"}
                         onClick={() => {
                             setEmotionRequested(!isEmotionRequested)
                             setAnalyzeRequested(false)
                         }}
                         >
                     
-                        Emotion
+                        Emotion analysis
                         <Icon_Emotion></Icon_Emotion>
                     </button>
                     <button className= {!isAnalyzeRequested? "k  py-2 px-4 rounded-lg inline-flex items-center gap-2 w-full justify-center bg-[--ternary]" : "k  py-2 px-4 rounded-lg inline-flex items-center gap-2 w-full justify-center bg-[--accent]"}
@@ -94,8 +100,17 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
 
                 </section>
             </section>
-            <section className="center text-center pt-8">
-                <p>This web application is in a part of Artificial Intelligence Subject in CSKMITL’s curriculum.</p>
+            <section className=" pt-8">
+                <p className = "text-red-500 text-2xl font-bold">Limitation</p>
+                <p className = "text-red-500">
+                    1. Only 5 logical fallcies which are ad hominem, ad populum, appeal to emotion, false casually and false dilemma are going to be predicted.
+                    <br></br>
+                    2. Only 6 emotions which are joy, surprise, fear, love, anger and sadness are going to be predicted.
+                    <br></br>
+                    3. The predicted result may not concise enough to be referenced in serious situations or conditional situations due to training dataset lacking.
+                    
+                </p>
+                <p className = "mt-3">This web application is in a part of Artificial Intelligence Subject in CSKMITL’s curriculum.</p>
             </section>
             
 

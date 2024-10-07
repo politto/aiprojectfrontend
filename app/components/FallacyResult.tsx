@@ -1,8 +1,7 @@
 import React from 'react'
 import { IFallacyPredProps } from '../types/IFallacyPredProps'
-import Banner from './Banner'
-import Image from 'next/image'
 import { PieChart } from './PieChart'
+
 type Props = {
     data: IFallacyPredProps[]
     error: boolean
@@ -10,26 +9,26 @@ type Props = {
 
 const mockData = [
    {
-  fallacy: "appeal_to_emotion",
-  percentage: 80,
-  words: 800
-},{
-  fallacy: "false_dilemma",
-  percentage: 8,
-  words: 64
-},{
-  fallacy: "false_casuality",
-  percentage: 6,
-  words: 3
-},{
-  fallacy: "appeal_to_authority",
-  percentage: 3,
-  words: 3
-},{
-  fallacy: "ad_hominem",
-  percentage: 3,
-  words: 3
-}
+      fallacy: "ad_hominem",
+      percentage: 32,
+      words: 800
+   }, {
+      fallacy: "circular_explanation",
+      percentage: 28,
+      words: 64
+   }, {
+      fallacy: "false_dilemma",
+      percentage: 20,
+      words: 3
+   }, {
+      fallacy: "fallacy_of_explanation",
+      percentage: 10,
+      words: 3
+   }, {
+      fallacy: "red_herring",
+      percentage: 5,
+      words: 3
+   }
 ]
 
 type FallacyDetail = {
@@ -71,7 +70,7 @@ export default function FallacyResultBox({data, error}: Props) {
   data.map((item) => {
     chartData.push({
       "id": item.fallacy,
-      "label": item.fallacy,
+      "label": item.fallacy.replace(/_/g, ' ').toUpperCase(),
       "value": item.percentage,
       "color": "hsl(200, 100%, 50%)"
     })
@@ -80,16 +79,12 @@ export default function FallacyResultBox({data, error}: Props) {
   return (
     <section className="">
 
-      
-      {/* <Banner></Banner> */}
       <section className="montserrat flex flex-col justify-center py-[2em] px-[1em] md:px-10 bg-white rounded-[3em] gap-4">
-        <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-[--primary] to-[--secondary] text-transparent bg-clip-text">Logical Fallacy Prediction</h2>
-        <p className="text-2xl text-gray-600 text-[#F03F83] font-semibold">Overview</p>
-        
-        <section className = "flex flex-col md:flex-row">
-          <section className="picWrapper min-w-full md:min-w-[50%] h-[50vh]">
-            
+        <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">Logical Fallacy Prediction Pie chart</h2>
 
+        <section className="flex flex-col md:flex-row">
+          <section className="picWrapper min-w-full md:min-w-[60%] h-[50vh]">
+            <p className="text-2xl text-gray-600 text-[#F03F83] font-semibold">Overview</p>
             <PieChart data={chartData}></PieChart>
           </section>
           <section className="">
@@ -99,15 +94,9 @@ export default function FallacyResultBox({data, error}: Props) {
             <p className = "mt-5">followed by</p>
             <p className = "text-[--secondary]">{data[1].fallacy} at {data[1].percentage}%</p>
             <p className = "text-[--secondary]">{data[2]?.fallacy} at {data[2]?.percentage}%</p>
-            <br></br>
-            <p>{data[0].fallacy} - {fallacyDetail[data[0].fallacy].detail}</p>
 
           </section>
         </section>
-
-
-
-        
       </section>
 
     </section>
