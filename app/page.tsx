@@ -64,11 +64,11 @@ export default function Home() {
        
       }
 
-    {/* {isAnalyzeRequested && isFallacyRequested && */}
+    {isAnalyzeRequested && isFallacyRequested &&
       
       <FallacyResultBox data = {fallacyDataAndError[0]} error = {fallacyDataAndError[1]}/>
        
-      {/* } */}
+    }
 
       <ResetButton resetAll = {resetAll}/>
       

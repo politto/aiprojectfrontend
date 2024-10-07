@@ -10,6 +10,7 @@ type Props = {
 
 export default function EmotionResult({data, error}: Props) {
 
+  // console.log(data)
   const mockData = {
     emotion: ""
   }

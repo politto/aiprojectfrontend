@@ -41,15 +41,15 @@ type FallacyDetail = {
 
 const fallacyDetail: FallacyDetail = {
   ad_hominem: {
-    detail: "เป็นการโจมตี โดยไปเน้นที่ตัวบุคคลผู้ที่โต้แย้งด้วย แทนที่จะเป็นเหตุผลจากหัวข้อที่กำลังจะโต้แย้ง หรือพูดถึง การกล่าวโจมตีบุคลากรทางการแพทย์ที่สนับสนุนการฉีดวัคซีนว่า ได้รับเงินค่าโฆษณาประชาสัมพันธ์มาจากบริษัทยาและเวชภัณฑ์รายใหญ่\n credit: BBC",
+    detail: "เหตุผล: พบเจอบ่อยในบทสนทนาหรือการโต้เถียงที่มักเบี่ยงเบนประเด็นจากข้อโต้แย้งไปสู่การโจมตีบุคคลแทน เช่น ในการโต้วาทีทางการเมืองหรือสื่อสังคมออนไลน์ ตัวอย่างประโยค:\"คุณไม่ควรเชื่อสิ่งที่เขาพูด เพราะเขาไม่จบมหาวิทยาลัยเลยด้วยซ้ำ\"",
     pic: "/pics/ad_hominem.jpg"
   },
   ad_populum: {
-    detail: "เป็นการใช้เหตุผลว่า ถ้ามีคนมากมายเชื่อว่าเป็นเช่นนั้น ก็คงจะถูกต้อง หรือถูกต้องที่สุด",
+    detail: "เหตุผล: พบบ่อยในโฆษณา การโน้มน้าวใจผ่านการกระตุ้นความรู้สึกของผู้ฟัง เช่น การใช้ภาพหรือเนื้อหาที่ทำให้รู้สึกกลัวหรือสงสารเพื่อให้ซื้อสินค้าหรือเปลี่ยนความคิด ตัวอย่างประโยค:\"หากคุณไม่ทำตามนี้ ชีวิตของคุณอาจตกอยู่ในอันตรายร้ายแรง!\"",
     pic: "/pics/ad_populum.jpg"
   },
   appeal_to_emotion: {
-    detail: "เป็นการใช้ความรู้สึกของผู้ฟัง ช่วยโน้มน่าวให้สิ่งที่ผู้สื่อความจะสื่อถูกคล้อยตามโดยผู้รับสื่อ",
+    detail: "เหตุผล: พบบ่อยในโฆษณา การโน้มน้าวใจผ่านการกระตุ้นความรู้สึกของผู้ฟัง เช่น การใช้ภาพหรือเนื้อหาที่ทำให้รู้สึกกลัวหรือสงสารเพื่อให้ซื้อสินค้าหรือเปลี่ยนความคิด ตัวอย่างประโยค:\"หากคุณไม่ทำตามนี้ ชีวิตของคุณอาจตกอยู่ในอันตรายร้ายแรง!\"",
     pic: "/pics/images.jpeg"
   },
   false_casuality: {
@@ -64,8 +64,8 @@ const fallacyDetail: FallacyDetail = {
 }
 
 export default function FallacyResultBox({data, error}: Props) {
-  console.log(data)
-  if (data.length == 0) { data = mockData }
+  // console.log(data)
+  if (data.length == 0) return;
 
   const chartData: ChartData[] = [];
   data.map((item) => {
@@ -99,7 +99,7 @@ export default function FallacyResultBox({data, error}: Props) {
             <p className = "mt-5">followed by</p>
             <p className = "text-[--secondary]">{data[1].fallacy} at {data[1].percentage}%</p>
             <p className = "text-[--secondary]">{data[2]?.fallacy} at {data[2]?.percentage}%</p>
-            <br></br><br></br><br></br>
+            <br></br>
             <p>{data[0].fallacy} - {fallacyDetail[data[0].fallacy].detail}</p>
 
           </section>

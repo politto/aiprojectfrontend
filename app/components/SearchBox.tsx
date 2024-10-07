@@ -25,7 +25,7 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
     }
 
     const handleAnalyzeClick = (event: any) => {
-        if (validatePrompt(prompt, setPrompt)) return 
+        if (!validatePrompt(prompt, setPrompt)) return 
         if (isEmotionRequested || isFallacyRequested) setAnalyzeRequested(true)
         else setAnalyzeRequested(false)
     }
@@ -38,6 +38,7 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
           setPrompt("");
           return false;
         }
+        // console.log("validate passed")
         return true;
       }
     return (
