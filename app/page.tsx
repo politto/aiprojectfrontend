@@ -22,9 +22,13 @@ export default function Home() {
   // Fetch emotion analysis
   useEffect(() => {
     if (isAnalyzeRequested && isEmotionRequested) {
-      predictEmotion(prompt).then((data) => {
-        setEmotionDataAndError(data);
-        (data[0] as IEmoPredProps[]).sort((da, db) => da.percentage - db.percentage).reverse();
+      predictEmotion(prompt).then((data: [IEmoPredProps[], boolean]) => {
+        
+        
+        (data[0]).sort((da, db) => da.percentage - db.percentage).reverse();
+        // data.forEach((data) => {data.emotion.replace(" ", "_")})
+        setEmotionDataAndError([data[0], false]);
+        
         console.log('Emotion data:', data);
       }).catch((error) => {
         console.error('Error fetching emotion data:', error);
@@ -34,9 +38,14 @@ export default function Home() {
 
     // Fetch fallacy analysis
     if (isAnalyzeRequested && isFallacyRequested) {
-      predictFallacy(prompt).then((data) => {
-        setFallacyDataAndError(data);
-        (data[0] as IFallacyPredProps[]).sort((da, db) => da.percentage - db.percentage).reverse();
+      predictFallacy(prompt).then((data: [IFallacyPredProps[], boolean]) => {
+        (data[0]).sort((da, db) => da.percentage - db.percentage).reverse();
+        data[0].forEach((d) => {
+          console.log(d)
+          d.fallacy = d.fallacy.replace(" ", "_")
+        })
+        
+        setFallacyDataAndError([data[0],false]);
         console.log('Fallacy data:', data);
       }).catch((error) => {
         console.error('Error fetching fallacy data:', error);

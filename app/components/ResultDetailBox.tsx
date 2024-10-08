@@ -19,6 +19,30 @@ const mockData: IEmoPredProps[] = [
   { emotion: "sadness", percentage: 0, words: 0 }
 ];
 
+const mockData2 = [
+  {
+     fallacy: "ad_hominem",
+     percentage: 32,
+     words: 800
+  }, {
+     fallacy: "circular_explanation",
+     percentage: 28,
+     words: 64
+  }, {
+     fallacy: "false_dilemma",
+     percentage: 20,
+     words: 3
+  }, {
+     fallacy: "fallacy_of_explanation",
+     percentage: 10,
+     words: 3
+  }, {
+     fallacy: "red_herring",
+     percentage: 5,
+     words: 3
+  }
+]
+
 // รายละเอียดของอารมณ์แต่ละประเภท
 const emotionDetail = {
   joy: {
@@ -84,8 +108,9 @@ const ResultDetailBox = ({ dataEmotion, errorEmotion, dataFallacy, errorFallacy 
     // // ใช้ mockData ถ้าไม่มีข้อมูลจาก API
     // const dataEmotion = dataEmotion.length > 0 ? dataEmotion : mockData;
 
-    // if (dataFallacy.length == 0 && dataEmotion.length == 0) return;
+    if (dataFallacy.length == 0 || dataEmotion.length == 0) return;
     // if (dataEmotion.length == 0) dataEmotion = mockData;
+    // if (dataFallacy.length == 0) dataFallacy = mockData2;
     // console.log(dataEmotion)
 
     let primaryEmotion = null;

@@ -40,9 +40,11 @@ export default function EmotionResultBox({ data, error }: Props) {
   console.log(data)
 
   // ถ้าไม่มีข้อมูลใช้ mockData
-  if (data.length === 0) { 
-    data = mockData 
-  }
+  // if (data.length === 0) { 
+  //   data = mockData 
+  // }
+  if (data.length === 0) return;
+  console.log(data)
 
   const chartData = data.map((item) => ({
     id: item.emotion,

@@ -35,11 +35,11 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
     const validatePrompt = (prompt: string, setPrompt: (prompt: string) => void) => {
         // I want some pattern matching
     
-        if (!prompt.match(/^[a-zA-Z0-9\s\.?!-_,()'"’ ]+$/)) {
-          alert("You are Please enter a valid prompt with english language only and not with any spacial character");
-          setPrompt("");
-          return false;
-        }
+        // if (!prompt.match(/^[a-zA-Z0-9\s\.?!-_,()'"’ ]+$/)) {
+        //   alert("You are Please enter a valid prompt with english language only and not with any spacial character");
+        //   setPrompt("");
+        //   return false;
+        // }
         const spaceMatch = prompt.match(/\s/g) 
         if (spaceMatch != null && spaceMatch.length > 999) {
             alert("This paragraph exceeds 1000 words")
@@ -80,7 +80,7 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
                         logical fallacy analysis
                         <Icon_Bad></Icon_Bad>
                     </button>
-                    <button className= {isEmotionRequested? "k  py-2 px-4 rounded inline-flex items-center gap-2 w-full justify-center bg-gradient-to-b from-[--secondary] to-[#7BC8FF] min-w-[14em] " : "k  py-2 px-4 rounded-lg inline-flex items-center gap-2 w-full justify-center bg-white"}
+                    <button className= {isEmotionRequested? "k  py-2 px-4 rounded inline-flex items-center gap-2 w-full justify-center bg-gradient-to-b from-[--secondary] to-[#7BC8FF] " : "k  py-2 px-4 rounded-lg inline-flex items-center gap-2 w-full justify-center bg-white"}
                         onClick={() => {
                             setEmotionRequested(!isEmotionRequested)
                             setAnalyzeRequested(false)
