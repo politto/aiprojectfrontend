@@ -35,7 +35,7 @@ export const SearchBox = ({isAnalyzeRequested, setAnalyzeRequested, isEmotionReq
     const validatePrompt = (prompt: string, setPrompt: (prompt: string) => void) => {
         // I want some pattern matching
     
-        if (!prompt.match(/^[a-zA-Z0-9\s.?!-_,()]+$/)) {
+        if (!prompt.match(/^[a-zA-Z0-9\s.?!-_,()'"]+$/)) {
           alert("You are Please enter a valid prompt with english language only and not with any spacial character");
           setPrompt("");
           return false;
