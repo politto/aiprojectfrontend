@@ -39,7 +39,7 @@ const emotionDetail = {
   },
   anger: {
     detail: (percentage: number) => `Anger has a percentage of ${percentage}% with a strong feeling of annoyance or displeasure.`,
-    pic: "/images/anger.png"
+    pic: "/images/rage.png"
   },
   sadness: {
     detail: (percentage: number) => `Sadness has a percentage of ${percentage}% with a feeling of sorrow or unhappiness.`,
@@ -84,8 +84,9 @@ const ResultDetailBox = ({ dataEmotion, errorEmotion, dataFallacy, errorFallacy 
     // // ใช้ mockData ถ้าไม่มีข้อมูลจาก API
     // const dataEmotion = dataEmotion.length > 0 ? dataEmotion : mockData;
 
-    if (dataFallacy.length == 0 && dataEmotion.length == 0) return;
-    console.log(dataEmotion)
+    // if (dataFallacy.length == 0 && dataEmotion.length == 0) return;
+    // if (dataEmotion.length == 0) dataEmotion = mockData;
+    // console.log(dataEmotion)
 
     let primaryEmotion = null;
     let emotionPercentage = null;
@@ -98,9 +99,7 @@ const ResultDetailBox = ({ dataEmotion, errorEmotion, dataFallacy, errorFallacy 
       console.log(emotionDetailData)
     }
 
-    
-
-    
+  
     return (
         <section className="bg-white rounded-3xl shadow-md p-8 flex flex-col lg:flex-row gap-4">
             {
