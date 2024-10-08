@@ -38,29 +38,28 @@ type FallacyDetail = {
   };
 };
 
-const fallacyDetail: FallacyDetail = {
+const fallacyDetail = {
   ad_hominem: {
-    detail: "เหตุผล: พบเจอบ่อยในบทสนทนาหรือการโต้เถียงที่มักเบี่ยงเบนประเด็นจากข้อโต้แย้งไปสู่การโจมตีบุคคลแทน เช่น ในการโต้วาทีทางการเมืองหรือสื่อสังคมออนไลน์ ตัวอย่างประโยค:\"คุณไม่ควรเชื่อสิ่งที่เขาพูด เพราะเขาไม่จบมหาวิทยาลัยเลยด้วยซ้ำ\"",
-    pic: "/pics/ad_hominem.jpg"
-  },
-  ad_populum: {
-    detail: "เหตุผล: พบบ่อยในโฆษณา การโน้มน้าวใจผ่านการกระตุ้นความรู้สึกของผู้ฟัง เช่น การใช้ภาพหรือเนื้อหาที่ทำให้รู้สึกกลัวหรือสงสารเพื่อให้ซื้อสินค้าหรือเปลี่ยนความคิด ตัวอย่างประโยค:\"หากคุณไม่ทำตามนี้ ชีวิตของคุณอาจตกอยู่ในอันตรายร้ายแรง!\"",
-    pic: "/pics/ad_populum.jpg"
+    detail: "This fallacy occurs frequently in discussions or debates where the argument shifts from addressing the actual issue to attacking the person making the argument. Common in political debates.",
+    pic: "/pics/AdHominem.jpg"
   },
   appeal_to_emotion: {
-    detail: "เหตุผล: พบบ่อยในโฆษณา การโน้มน้าวใจผ่านการกระตุ้นความรู้สึกของผู้ฟัง เช่น การใช้ภาพหรือเนื้อหาที่ทำให้รู้สึกกลัวหรือสงสารเพื่อให้ซื้อสินค้าหรือเปลี่ยนความคิด ตัวอย่างประโยค:\"หากคุณไม่ทำตามนี้ ชีวิตของคุณอาจตกอยู่ในอันตรายร้ายแรง!\"",
-    pic: "/pics/images.jpeg"
+    detail: "This fallacy involves manipulating the audience's emotions—such as fear, sympathy, or anger—to sway their opinion, without providing logical reasoning or evidence to support the argument.",
+    pic: "/pics/Appeal_to_Emotion.jpg"
   },
-  false_casuality: {
-    detail: "เป็นการที่เมื่อเหตุการณ์หนึ่ง เกิดก่อนเหตุการณ์หนึ่ง แล้วจึงอุปมาไปว่า เหตุการหนึ่ง จะเป็นสาเหตุของอีกเหตุการณ์หนึ่งเสมอ",
-    pic: "/pics/false_casuality.jpg"
+  ad_populum: {
+    detail: "This fallacy occurs when someone claims something is true or right simply because many people believe it or because it is popular. Often seen in advertising and political speeches.",
+    pic: "/pics/Ad_Populum.jpg"
   },
   false_dilemma: {
-    detail: "เป็นการด่วนคิดไปเองว่า สิ่งที่กำลังกล่าวถึงนั้น จะมีแค่ 2 ทางเลือกเท่านั้น ทั้งที่ความจริงมันไม่ใช่",
-    pic: "/pics/false_dilemma.jpg"
+    detail: "This fallacy presents only two options as if they are the only possibilities, when in reality, there may be other alternatives. Often used in political or marketing strategies.",
+    pic: "/pics/False_dilemma.jpg"
   },
-  
-}
+  false_causality: {
+    detail: "This fallacy occurs when someone incorrectly links two events as cause and effect, even though there is no clear relationship between them. Often found in misleading arguments or articles.",
+    pic: "/pics/false_causality.jpg"
+  },
+};
 
 export default function FallacyResultBox({data, error}: Props) {
   // console.log(data)
